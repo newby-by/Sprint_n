@@ -1,6 +1,4 @@
-<img src="./resource/python-logo-only.svg" width="20" height="20">  
-<img src="./resource/1280px-Selenium_Logo.png" width="20" height="20">  
-<img src="./resource/images.jfif" width="20" height="20"> 
+<img src="./resource/python-logo-only.svg" width="20" height="20"><img src="./resource/1280px-Selenium_Logo.png" width="20" height="20"><img src="./resource/images.jfif" width="20" height="20"> 
 
 # The test bicycle for Yandex's Route app
 
