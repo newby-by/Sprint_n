@@ -17,10 +17,10 @@ My Tomcat that got me up early.
 Your 4 a.m. song was so cool.(RIP)
 
 ## Requirements
-python~=3.13.13
-allure-pytest
-pytest
-selenium==3.141.0
+    python~=3.13.13
+    allure-pytest
+    pytest
+    selenium==3.141.0
 
 *Note:* For local test run we use `webdriver-manager`: Chrome, Gecko and etc.
 
