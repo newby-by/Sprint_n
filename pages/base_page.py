@@ -109,5 +109,6 @@ class BasePage(ABC):
     def download_file(self, locator, _path):
         self.wait_element_located(locator)
         self.driver.find_element(*locator).send_keys(_path)
-    
-    
+
+    def get_text(self, locator):
+        return self.driver.find_element(*locator).text

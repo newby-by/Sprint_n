@@ -10,6 +10,9 @@ from selenium.webdriver.firefox.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
+import data
+import pages
+
 
 # Monkey Patch the base64 Module
 if not hasattr(base64, 'encodestring'):
@@ -62,3 +65,13 @@ def driver(pytestconfig):
 
     yield driver
     driver.quit()
+
+
+@pytest.fixture(scope='function')
+def chose_route(driver):
+    create_route = pages.CreateRoutePage(driver)
+    create_route.open(data.BASE_URL)
+    create_route.set_start_route(data.ADDRESSES[0])
+    create_route.set_end_route(data.ADDRESSES[1])
+
+    return create_route.driver
