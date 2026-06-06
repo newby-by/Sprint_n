@@ -1,13 +1,13 @@
 from abc import ABC
 
 import allure
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import (
     element_to_be_clickable,
     presence_of_element_located,
     visibility_of_element_located
 )
-
 from pages.expected_conditions import text_in_element_is_not_empty
 
 
@@ -73,8 +73,9 @@ class BasePage(ABC):
     @allure.step("Scroll to an element")
     def scroll_to(self, locator):
         element = self.wait_element_located(locator)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);",
-                                   element)
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView(true);", element
+        )
 
     def get_current_handle(self):
         return self.driver.current_window_handle
@@ -107,8 +108,12 @@ class BasePage(ABC):
         return self.driver.find_elements(*locator)
         
     def download_file(self, locator, _path):
-        self.wait_element_located(locator)
         self.driver.find_element(*locator).send_keys(_path)
 
     def get_text(self, locator):
+        self.wait_element_located(locator)
         return self.driver.find_element(*locator).text
+
+    def move_cursor_to(self, locator):
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_element(locator)).perform()

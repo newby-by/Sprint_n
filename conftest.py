@@ -68,10 +68,32 @@ def driver(pytestconfig):
 
 
 @pytest.fixture(scope='function')
-def chose_route(driver):
+def route_with_different_addresses(driver):
     create_route = pages.CreateRoutePage(driver)
     create_route.open(data.BASE_URL)
     create_route.set_start_route(data.ADDRESSES[0])
     create_route.set_end_route(data.ADDRESSES[1])
 
     return create_route.driver
+
+
+@pytest.fixture(scope='function')
+def route_with_the_same_addresses(driver):
+    create_route = pages.CreateRoutePage(driver)
+    create_route.open(data.BASE_URL)
+    create_route.set_start_route(data.ADDRESSES[0])
+    create_route.set_end_route(data.ADDRESSES[0])
+
+    return create_route.driver
+
+
+@pytest.fixture(scope='function')
+def order_taxi_form(route_with_different_addresses):
+    chose_route_page = pages.ChooseRoutePage(
+            route_with_different_addresses
+        )
+    chose_route_page.choose_rapid_route()
+    chose_route_page.click_on_button_order_taxi()
+
+    order_taxi = pages.OrderTaxiForm(chose_route_page.driver)
+    return order_taxi.driver
