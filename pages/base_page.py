@@ -6,9 +6,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import (
     element_to_be_clickable,
     presence_of_element_located,
-    visibility_of_element_located
+    visibility_of_element_located,
+    text_to_be_present_in_element
 )
-from pages.expected_conditions import text_in_element_is_not_empty
+from pages.expected_conditions import (
+    text_in_element_is_not_empty,
+    text_in_element_is_different
+)
 
 
 class BasePage(ABC):
@@ -53,12 +57,18 @@ class BasePage(ABC):
             text_in_element_is_not_empty(locator, method)
         )
         return element
+    
+    def wait_text_in_element_is_changed(self, locator, _text, time=10):
+        element = WebDriverWait(self.driver, time).until(
+            text_in_element_is_different(locator, _text)
+        )
+        return element
 
     @allure.step("Click on an element")
     def click(self, locator):
-        element = self.wait_element_clickable(locator)
+        self.wait_element_clickable(locator)
         self.scroll_to(locator)
-        element.click()
+        self.find_element(locator).click()
 
     def input(self, locator, text):
         self.wait_element_located(locator)

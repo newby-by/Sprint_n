@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 import data
@@ -5,9 +6,6 @@ from .base_page import BasePage
 
 
 class OrderTaxiForm(BasePage):
-    ORDER_TAXI_BUTTON = (
-        By.XPATH, ".//span[text()='Ввести номер и заказать']"
-    )
     CARDS = (
         By.XPATH, ".//div[@class='tariff-cards']/child::div"
     )
@@ -23,6 +21,17 @@ class OrderTaxiForm(BasePage):
     FIELDS = (
         By.XPATH, ".//div[@class='form']/div"
     )
+    REQUIREMENT_FIELD = (
+        By.XPATH, ".//div[text()='Требования к заказу']"
+    )
+    CHECK_TABLE = (
+        By.XPATH,
+        ".//div[text()='Столик для ноутбука']/following-sibling::div//span"
+    )
+    ORDER_TAXI_BUTTON = (
+        By.XPATH, ".//span[text()='Ввести номер и заказать']"
+    )
+
     TARIFF_DESCRIPTION = lambda id: (
         By.XPATH,
         f".//div[@id='tariff-card-{id}']//div[@class='i-dPrefix']"
@@ -81,3 +90,9 @@ class OrderTaxiForm(BasePage):
         locator = OrderTaxiForm.INFO_BUTTON(title)
         self.wait_element_clickable(locator)
         self.move_cursor_to(locator)
+
+    @allure.step("Order a taxi with table")
+    def order_with_requirement_table(self):
+        self.click(OrderTaxiForm.REQUIREMENT_FIELD)
+        self.click(OrderTaxiForm.CHECK_TABLE)
+        self.click(OrderTaxiForm.ORDER_TAXI_BUTTON)

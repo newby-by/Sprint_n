@@ -97,3 +97,12 @@ def order_taxi_form(route_with_different_addresses):
 
     order_taxi = pages.OrderTaxiForm(chose_route_page.driver)
     return order_taxi.driver
+
+
+@pytest.fixture(scope='function')
+def ordered_taxi(order_taxi_form):
+    order_taxi_page = pages.OrderTaxiForm(order_taxi_form)
+    order_taxi_page.choose_tariff("Рабочий")
+    order_taxi_page.order_with_requirement_table()
+
+    return order_taxi_page.driver

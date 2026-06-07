@@ -36,3 +36,4 @@ class TestOrderTaxi:
         order_taxi_page.choose_tariff(tariff_title)
         order_taxi_page.open_description_tariff_with(tariff_title)
         assert order_taxi_page.has_expected_description(tariff_title)
+       
