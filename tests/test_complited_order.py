@@ -13,7 +13,7 @@ class TestComplitedOrderPage:
         complited_order_page.wait_show_up_complited_order_page()
 
         assert True
-    
+
     @allure.title('Complited order has car number and tariff image')
     def test_complited_order_has_car_number_and_tariff_image(
         self, ordered_taxi
@@ -34,7 +34,7 @@ class TestComplitedOrderPage:
         assert (complited_order_page.has_raiting()
                 and complited_order_page.has_image_tariff()
                 and complited_order_page.has_car_driver_name())
-    
+
     @allure.title('Complited order has expected detail')
     def test_complited_order_has_expected_detail(
         self, order_taxi_form

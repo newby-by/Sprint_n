@@ -28,7 +28,7 @@ class TestChooseRoute:
             route_with_the_same_addresses
         )
         assert chose_route_page.is_info_with_the_same_addresses_correct()
-    
+
     @allure.title("Choose an optimal route with different addreses")
     def test_choose_optimal_route_with_different_addresses(
         self, route_with_different_addresses
@@ -52,7 +52,7 @@ class TestChooseRoute:
 
         assert (chose_route_page.is_rapid_route_available()
                 and chose_route_page.is_info_about_rapid_route_correct())
-    
+
     @pytest.mark.xfail(reason='During is not different', strict=True)
     def test_switch_from_optimal_to_radid_info_is_changed(
         self, route_with_different_addresses
@@ -66,7 +66,7 @@ class TestChooseRoute:
 
         chose_route_page.choose_rapid_route()
         rapid_info = (chose_route_page.get_price_from_info_block(),
-                        chose_route_page.get_during_from_info_block())
+                      chose_route_page.get_during_from_info_block())
 
         assert (
             optimal_info[0] != rapid_info[0]
@@ -92,7 +92,8 @@ class TestChooseRoute:
         assert chose_route_page.are_types_active()
 
     @allure.title("Choose a myself route with different addreses")
-    @allure.description("The button 'Забронировать' is active for type 'Драйв'")
+    @allure.description("The button 'Забронировать' "
+                        "is active for type 'Драйв'")
     def test_choose_myself_route_with_different_addresses_with_carsharing(
         self, route_with_different_addresses
     ):
@@ -102,4 +103,5 @@ class TestChooseRoute:
         chose_route_page.choose_myself_route()
         chose_route_page.choose_type_with(data.TYPE_MOVEMENT['Драйв'])
 
-        assert chose_route_page.is_info_about_rapid_route_correct_with_carsharing()
+        assert (chose_route_page.
+                is_info_about_rapid_route_correct_with_carsharing())

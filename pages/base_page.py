@@ -31,7 +31,7 @@ class BasePage(ABC):
             presence_of_element_located(locator)
         )
         return element
-    
+
     def wait_element_dislocated(self, locator, timeout=10):
         element = WebDriverWait(
             driver=self.driver,
@@ -39,7 +39,7 @@ class BasePage(ABC):
             presence_of_element_located(locator)
         )
         return element
-    
+
     def wait_element_became_invisibile(self, locator, timeout=10):
         element = WebDriverWait(
             driver=self.driver,
@@ -47,7 +47,7 @@ class BasePage(ABC):
             visibility_of_element_located(locator)
         )
         return element
-     
+
     def wait_visibility_of_element_located(self, locator, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
             visibility_of_element_located(locator)
@@ -65,13 +65,13 @@ class BasePage(ABC):
             text_in_element_is_not_empty(locator, method)
         )
         return element
-    
+
     def wait_text_to_be_present_in_element(self, locator, _text, time=10):
         element = WebDriverWait(self.driver, time).until(
             text_to_be_present_in_element(locator, _text)
         )
         return element
-    
+
     def wait_text_in_element_is_changed(self, locator, _text, time=10):
         element = WebDriverWait(self.driver, time).until(
             text_in_element_is_different(locator, _text)
@@ -118,11 +118,11 @@ class BasePage(ABC):
     @property
     def current_url(self):
         return self.driver.current_url
-        
+
     @property
     def title(self):
         return self.driver.title
-    
+
     def find_element(self, locator):
         self.wait_element_located(locator)
         return self.driver.find_element(*locator)
@@ -130,7 +130,7 @@ class BasePage(ABC):
     def find_elements(self, locator):
         self.wait_element_located(locator)
         return self.driver.find_elements(*locator)
-        
+
     def download_file(self, locator, _path):
         self.driver.find_element(*locator).send_keys(_path)
 

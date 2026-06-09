@@ -37,7 +37,9 @@ def driver(pytestconfig):
     elif pytestconfig.getoption("browser") == "firefox":
         os.environ['GH_TOKEN'] = os.getenv('GH_TOKEN')
         try:
-            driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+            driver = webdriver.Firefox(
+                executable_path=GeckoDriverManager().install()
+            )
         except SessionNotCreatedException:
             # if the path to firefox binary file is not found
             load_dotenv()

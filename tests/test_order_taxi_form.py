@@ -28,12 +28,13 @@ class TestOrderTaxi:
     def test_order_form_has_expected_fields(self, order_taxi_form):
         order_taxi_page = pages.OrderTaxiForm(order_taxi_form)
         assert order_taxi_page.has_4_fields_in_form()
-        
+
     @allure.title("The tariff {tariff_title} has expected description")
     @pytest.mark.parametrize("tariff_title", data.ORDER_TAXI_FORM["params"])
-    def test_tariff_has_expected_description(self, order_taxi_form, tariff_title):
+    def test_tariff_has_expected_description(
+        self, order_taxi_form, tariff_title
+    ):
         order_taxi_page = pages.OrderTaxiForm(order_taxi_form)
         order_taxi_page.choose_tariff(tariff_title)
         order_taxi_page.open_description_tariff_with(tariff_title)
         assert order_taxi_page.has_expected_description(tariff_title)
-       

@@ -35,8 +35,9 @@ class ChooseRoutePage(BasePage):
         self.wait_visibility_of_element_located(ChooseRoutePage.OPTIMAL_ROUTE)
         self.wait_visibility_of_element_located(ChooseRoutePage.RAPID_ROUTE)
         self.wait_visibility_of_element_located(ChooseRoutePage.MYSELF_ROUTE)
-        return 'shown' in self.get_attribute(ChooseRoutePage.TYPE_BLOCK, 'class')
-    
+        return 'shown' in self.get_attribute(ChooseRoutePage.TYPE_BLOCK,
+                                             'class')
+
     @allure.step("The info block for the same addresses")
     def is_info_with_the_same_addresses_correct(self):
         self.wait_visibility_of_element_located(
@@ -113,7 +114,7 @@ class ChooseRoutePage(BasePage):
             "Такси" in self.get_price_line_from_info_block()
             and "В пути" in self.get_during_line_from_info_block()
         )
-    
+
     @allure.step("The myself type for 'Драйв' has a price and "
                  "during of a trip and button 'Забронировать'")
     def is_info_about_rapid_route_correct_with_carsharing(self):
@@ -134,7 +135,7 @@ class ChooseRoutePage(BasePage):
             "Драйв" in self.get_price_line_from_info_block()
             and "В пути" in self.get_during_line_from_info_block()
         )
-    
+
     @allure.step("Choose the optimal route")
     def choose_optimal_route(self):
         self.wait_element_clickable(ChooseRoutePage.OPTIMAL_ROUTE)
@@ -167,11 +168,11 @@ class ChooseRoutePage(BasePage):
 
     def get_price_line_from_info_block(self):
         return self.get_text(ChooseRoutePage.PRICE_INFO_ROUTE)
-    
+
     def get_price_from_info_block(self):
         price: str = self.get_price_line_from_info_block()
         return price.split('~')[1].strip().split()[0]
-    
+
     def get_during_line_from_info_block(self):
         return self.get_text(ChooseRoutePage.DURING_INFO_ROUTE)
 

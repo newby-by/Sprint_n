@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
 
-class  WaitPage(BasePage):
+class WaitPage(BasePage):
 
     TITLE = (By.XPATH, ".//div[@class='order-header-title']")
     TIME = (
@@ -25,15 +25,17 @@ class  WaitPage(BasePage):
         self.wait_element_clickable(WaitPage.CANCEL_BUTTON)
         self.wait_element_clickable(WaitPage.DETAIL_BUTTON)
         return True
-    
+
     def is_time_changed(self):
-        self.wait_text_in_element_is_not_empty(WaitPage.TIME, lambda text: text)
+        self.wait_text_in_element_is_not_empty(
+            WaitPage.TIME, lambda text: text
+        )
         self.wait_text_in_element_is_changed(
             WaitPage.TIME,
             self.find_element(WaitPage.TIME).text
         )
         return True
-    
+
     @allure.step("Press the cancel button")
     def press_cancel(self):
         self.click(WaitPage.CANCEL_BUTTON)

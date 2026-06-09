@@ -29,4 +29,3 @@ class CreateRoutePage(BasePage):
             CreateRoutePage.POINT_ROUTE_WITH_ADDRESS(address)
         )
         return True
-        
