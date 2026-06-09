@@ -115,20 +115,29 @@ pytest -vv
 
     Выбираем тариф Рабочий, включаем чекбокс Столик для ноутбука, нажимаем кнопку Ввести номер и заказать 
         
-        - Появляется окно ожидания машины (проверить элементы по ТЗ)
-        **DONE** `TestWaitPage.test_wait_page_arter_odered_is_available`
+    - Появляется окно ожидания машины (проверить элементы по ТЗ)
+    
+    **DONE** `TestWaitPage.test_wait_page_after_ordered_is_available`
     
     Дождаться окончания таймера поиска машины 
         
-        - Отображается окно совершенного заказа (проверить элементы по ТЗ)
-    
+    - Отображается окно совершенного заказа (проверить элементы по ТЗ)
+
+    **DONE** `TestComplitedOrderPage.test_complited_order_has_expected_title`
+     `TestComplitedOrderPage.test_complited_order_has_car_number_and_tariff_image`
+     `TestComplitedOrderPage.test_complited_order_has_raiting_and_name_and_foto_driver`
+
     Нажать кнопку Детали в блоке Еще про поездку 
         
-        - Указана стоимость, которая была при выборе тарифа
+    - Указана стоимость, которая была при выборе тарифа
+    
+    **DONE** `TestComplitedOrderPage.test_complited_order_has_expected_detail`
     
     Нажать кнопку Отмена 
         
-        - Окно закрывается
+    - Окно закрывается
+    
+    **DONE** `TestComplitedOrderPage.test_complited_order_press_cancel_is_closed`
 
 - ТЗ и интерфейсы 
 1. Блок начального экрана: 

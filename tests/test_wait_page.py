@@ -7,7 +7,7 @@ import pages
 class TestWaitPage:
 
     @allure.title('After ordered taxi wait form is available')
-    def test_wait_page_arter_odered_is_available(swelf, ordered_taxi):
+    def test_wait_page_after_ordered_is_available(self, ordered_taxi):
         wait_page = pages.WaitPage(ordered_taxi)
 
-        assert wait_page.is_available()
+        assert wait_page.is_available() and wait_page.is_time_changed()

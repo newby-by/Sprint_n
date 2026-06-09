@@ -14,6 +14,11 @@ class OrderTaxiForm(BasePage):
         (".//div[@class='tariff-cards']//div[@class='tcard-title' and "
          f"text()='{title}']/parent::div")
     )
+    PRICE_BY_TITLE_TARIFF = lambda title: (
+        By.XPATH,
+        (".//div[@class='tariff-cards']//div[@class='tcard-title' and "
+         f"text()='{title}']/following-sibling::div")
+    )
     INFO_BUTTON = lambda title: (
         OrderTaxiForm.CARD_BY_TITLE(title)[0],
         OrderTaxiForm.CARD_BY_TITLE(title)[1] + "/button"
@@ -55,6 +60,13 @@ class OrderTaxiForm(BasePage):
         )
         return self.find_element(OrderTaxiForm.CARD_BY_TITLE(title))
     
+    def get_price_tariff(self, title):
+        self.wait_visibility_of_element_located(
+            OrderTaxiForm.PRICE_BY_TITLE_TARIFF(title)
+        )
+        _text:str = self.get_text(OrderTaxiForm.PRICE_BY_TITLE_TARIFF(title))
+        return _text.split()[0]
+    
     def is_card_active(self, title):
         card = self.get_card_by_title(title)
         return "active" in card.get_attribute('class')
@@ -83,9 +95,11 @@ class OrderTaxiForm(BasePage):
             OrderTaxiForm.TARIFF_DESCRIPTION(id)
         ) == data.ORDER_TAXI_FORM["descriptions"][id]
     
+    @allure.step("Choose tariff with title {title}")
     def choose_tariff(self, title):
         self.click(OrderTaxiForm.CARD_BY_TITLE(title))
 
+    @allure.step("Open description tariff with title {title}")
     def open_description_tariff_with(self, title):
         locator = OrderTaxiForm.INFO_BUTTON(title)
         self.wait_element_clickable(locator)

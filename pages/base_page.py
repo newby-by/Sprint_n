@@ -39,6 +39,14 @@ class BasePage(ABC):
             presence_of_element_located(locator)
         )
         return element
+    
+    def wait_element_became_invisibile(self, locator, timeout=10):
+        element = WebDriverWait(
+            driver=self.driver,
+            timeout=timeout).until_not(
+            visibility_of_element_located(locator)
+        )
+        return element
      
     def wait_visibility_of_element_located(self, locator, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
@@ -52,9 +60,15 @@ class BasePage(ABC):
         )
         return element
 
-    def wait_text_in_element(self, locator, method, time=10):
+    def wait_text_in_element_is_not_empty(self, locator, method, time=10):
         element = WebDriverWait(self.driver, time).until(
             text_in_element_is_not_empty(locator, method)
+        )
+        return element
+    
+    def wait_text_to_be_present_in_element(self, locator, _text, time=10):
+        element = WebDriverWait(self.driver, time).until(
+            text_to_be_present_in_element(locator, _text)
         )
         return element
     

@@ -42,3 +42,11 @@ ORDER_TAXI_FORM = {
     ],
     "fields": ["Телефон", "Способ оплаты", "Комментарий водителю", "Требования к заказу"],
 }
+
+TEST_TARIFF_NAME = "Рабочий"
+
+class ComplitedOrderData:
+    TITLE = " мин. и приедет"
+    CAR_NUMBER_PATTERN = "[а-я] [0-9]{3} [а-я]{2}"
+    CAR_DRIVER_NAME_PATTERN = "^[А-Я][а-я]+"
+    TIME_FOR_WAITING = 100
